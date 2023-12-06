@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  
+  db:
+    image: postgres
+    env_file: .env
+    environment:
+      POSTGRES_NAME: ${POSTGRES_NAME}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+  web:
+    env_file: .env
+    build: .
+    command: >
+      sh -c "python3 manage.py makemigrations &&
+            python3 manage.py migrate --run-syncdb &&
+            python3 manage.py runserver 0.0.0.0:8000"
+
+    volumes:
+      - .:/project
+    ports:
+      - 8000:8000
+    environment:
+      POSTGRES_NAME: ${POSTGRES_NAME}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      - db
+volumes:
+  postgres_data:
+
