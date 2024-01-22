@@ -11,6 +11,7 @@ pygments = "*"
 django-cors-headers = "*"
 coreapi = "*"
 markdown = "*"
+gunicorn = "*"
 
 [dev-packages]
 

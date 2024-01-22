@@ -26,11 +26,15 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '18.189.95.23'
+]
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
-    'http://localhost:8000'
+    'http://localhost:8000',
+    'http://18.189.95.23:8000'
 ]
 
 
@@ -63,6 +67,8 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 ROOT_URLCONF = 'config.urls'
 

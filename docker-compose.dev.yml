@@ -13,13 +13,17 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
   web:
-    image: jiml000/semenenko:v2
     container_name: web
     restart: always
     env_file: .env
+    build: .
     # command: >
     #   sh -c "python3 manage.py makemigrations &&
     #         python3 manage.py migrate --run-syncdb"
+
+    # Lost static files if it is removed. ???
+    volumes:
+      - .:/project
     ports:
       - 8000:8000
     environment:
